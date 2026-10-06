@@ -1,26 +1,48 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0908;
+  --foreground: #E6DED3;
 }
 
+/* Tokens que apontam para outras variáveis (as fontes do next/font) precisam
+   ficar em `@theme inline`, senão o Tailwind gera um var() aninhado que não resolve. */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-archivo);
+  --font-display: var(--font-archivo);
+  --font-mono: var(--font-jetbrains);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Animação da varredura CRT. No v4 os @keyframes moram dentro do @theme
+   junto do token --animate-*, que é o que gera a classe animate-crt-sweep. */
+@theme {
+  --animate-crt-sweep: crt-sweep 8s linear infinite;
+
+  @keyframes crt-sweep {
+    from { transform: translateY(-100%); }
+    to   { transform: translateY(250%); }
   }
+
+  --animate-caret: caret 1.1s step-end infinite;
+
+  @keyframes caret {
+    0%, 49%   { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+}
+
+/* Paleta: valores literais, então `@theme` normal — assim as vars --color-*
+   também ficam disponíveis para uso direto em CSS. */
+@theme {
+  --color-bg: #0a0908;
+  --color-ink: #E6DED3;
+  --color-ink-bright: #F4ECE2;
+  --color-gold: #E8A24A;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
