@@ -4,6 +4,7 @@ import HeroDove from "../HeroDove";
 import CrtOverlay from "../CrtOverlay";
 import Reveal from "../system/Reveal";
 import { useSystem } from "../system/SystemProvider";
+import { PROJECTS } from "@/app/lib/content";
 
 export default function Hero() {
   const { t } = useSystem();
@@ -95,7 +96,7 @@ export default function Hero() {
       {/* Scroll indicator — fora do grid, ancorado no rodapé da section */}
       <div className="absolute left-6 lg:left-19 bottom-9 flex gap-6.5 font-mono text-[9px] uppercase tracking-[0.24em] text-ink/28">
         <span>{t.scroll} &darr;</span>
-        <span>06 {t.navWork}</span>
+        <span>{String(PROJECTS.length).padStart(2, "0")} {t.navWork}</span>
       </div>
 
       {/* Overlay CRT: confinado a esta section (que ja e `relative`) */}

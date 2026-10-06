@@ -1,7 +1,25 @@
 import type { Copy } from "./copy";
 
+export type Project = {
+  repo: string;
+  year: string;
+  url: string;
+  tags: readonly string[];
+  pt: string;
+  en: string;
+  /** Screenshot em /public; sem ela o card mostra o nome do repo. */
+  image?: string;
+};
+
 /** Projetos: metadados fixos + descrição por idioma. */
-export const PROJECTS = [
+export const PROJECTS: readonly Project[] = [
+  {
+    repo: "deskpilot", year: "2026", url: "https://github.com/gabrielssouza23/claude-test",
+    tags: ["Next.js 16", "FastAPI", "PostgreSQL", "Claude API"],
+    image: "/projects/deskpilot.png",
+    pt: "Helpdesk com triagem por IA: o Claude classifica cada ticket e rascunha a resposta no idioma do cliente, com fallback por regras. Front em Next.js + TypeScript, API em Python/FastAPI com PostgreSQL, testes e CI.",
+    en: "AI-assisted helpdesk: Claude classifies each ticket and drafts a reply in the customer's language, with a rule-based fallback. Next.js + TypeScript front end, Python/FastAPI API on PostgreSQL, with tests and CI.",
+  },
   {
     repo: "maxbot-ui", year: "2025", url: "https://github.com/gabrielssouza23/maxbot-ui",
     tags: ["Next.js 15", "React 19", "Radix", "Tailwind 4"],
@@ -21,12 +39,6 @@ export const PROJECTS = [
     en: "API for the Carbonífera Biodiversa project: Fastify 5 over PostgreSQL, JWT auth and multipart file upload.",
   },
   {
-    repo: "portfolio3D", year: "2024", url: "https://github.com/gabrielssouza23/portfolio3D",
-    tags: ["Three.js", "R3F", "Framer Motion"],
-    pt: "Portfólio 3D com react-three-fiber e drei: cena interativa, animações em Framer Motion e envio de contato por EmailJS.",
-    en: "3D portfolio with react-three-fiber and drei: interactive scene, Framer Motion animations and EmailJS contact form.",
-  },
-  {
     repo: "quick-news", year: "2024", url: "https://github.com/gabrielssouza23/quick-news",
     tags: ["React", "Axios", "Tailwind"],
     pt: "Portal de notícias em React consumindo API externa via Axios, com roteamento em React Router e UI em Material Tailwind.",
@@ -38,7 +50,7 @@ export const PROJECTS = [
     pt: "Sistema de controle de almoxarifado em PHP com arquitetura MVC própria, MySQL, Bootstrap e jQuery.",
     en: "Inventory control system in PHP with a hand-rolled MVC architecture, MySQL, Bootstrap and jQuery.",
   },
-] as const;
+];
 
 /** Grupos do stack — os rótulos de nível vêm traduzidos. */
 export const buildStack = (t: Copy) => [
@@ -50,15 +62,15 @@ export const buildStack = (t: Copy) => [
   { label: t.gBack, items: [
     { name: "Node.js", lvl: t.lvlPrimary }, { name: "NestJS", lvl: t.lvlSolid },
     { name: "Fastify", lvl: t.lvlSolid }, { name: "PHP", lvl: t.lvlSolid },
-    { name: "SQL puro", lvl: t.lvlStudy },
+    { name: "Python / FastAPI", lvl: t.lvlStudy }, { name: t.rawSql, lvl: t.lvlStudy },
   ] },
   { label: t.gData, items: [
     { name: "PostgreSQL", lvl: t.lvlPrimary }, { name: "MySQL", lvl: t.lvlSolid },
-    { name: "LangChain", lvl: t.lvlSolid },
+    { name: "LangChain", lvl: t.lvlSolid }, { name: "Claude API", lvl: t.lvlSolid },
   ] },
   { label: t.gInfra, items: [
     { name: "AWS", lvl: t.lvlCert }, { name: "Git / GitHub", lvl: t.lvlDaily },
-    { name: "JWT / REST", lvl: t.lvlDaily },
+    { name: "JWT / REST", lvl: t.lvlDaily }, { name: "Docker", lvl: t.lvlStudy },
   ] },
 ];
 

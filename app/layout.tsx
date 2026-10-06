@@ -1,4 +1,5 @@
 // app/layout.tsx
+import type { Metadata } from "next";
 import { Archivo, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -14,6 +15,12 @@ const jetbrains = JetBrains_Mono({
   weight: ["300", "400", "500"],
   variable: "--font-jetbrains",
 });
+
+export const metadata: Metadata = {
+  title: "Gabriel Silva · Full Stack Developer",
+  description:
+    "Full stack developer from Brazil working with React, Next.js, TypeScript, Node.js, Python and PostgreSQL.",
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
