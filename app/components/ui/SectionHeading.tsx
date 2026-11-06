@@ -10,11 +10,11 @@ export default function SectionHeading({
 }) {
   return (
     <div className="mb-11 flex items-baseline gap-4.5">
-      <span className="font-mono text-[10px] tracking-[0.2em] text-gold">{num}</span>
-      <h2 className="text-xs font-normal uppercase tracking-[0.36em] text-ink">{title}</h2>
-      <span aria-hidden className="h-px flex-1 bg-ink/13" />
+      <span className="font-mono text-[11px] tracking-[0.2em] text-gold">{num}</span>
+      <h2 className="text-[13px] font-medium uppercase tracking-[0.3em] text-ink-bright">{title}</h2>
+      <span aria-hidden className="h-px flex-1 bg-ink/15" />
       {meta && (
-        <span className="font-mono text-[10px] tracking-[0.2em] text-ink/32">{meta}</span>
+        <span className="font-mono text-[11px] tracking-[0.16em] text-ink/58">{meta}</span>
       )}
     </div>
   );

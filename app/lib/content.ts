@@ -1,66 +1,87 @@
 import type { Copy } from "./copy";
 
-/** Projetos: metadados fixos + descrição por idioma. */
+/**
+ * Projetos: metadados fixos + descrição por idioma. A demo é um MP4 em
+ * /public (convertido do GIF original: ~5x menor, mesma resolução).
+ */
 export const PROJECTS = [
   {
-    repo: "maxbot-ui", year: "2025", url: "https://github.com/gabrielssouza23/maxbot-ui",
-    tags: ["Next.js 15", "React 19", "Radix", "Tailwind 4"],
-    pt: "Interface do produto em Next.js 15 e React 19. Componentes acessíveis sobre Radix, variantes com CVA e Tailwind 4.",
-    en: "Product interface in Next.js 15 and React 19. Accessible components on top of Radix, variants with CVA and Tailwind 4.",
-  },
-  {
-    repo: "planTrip", year: "2024", url: "https://github.com/gabrielssouza23/planTrip",
-    tags: ["React", "TypeScript", "Fastify", "Prisma"],
-    pt: "Planejador de viagens em grupo. Front em React + TypeScript e API própria em Fastify com Prisma, validação por Zod e convites por e-mail.",
-    en: "Group trip planner. React + TypeScript front end and a Fastify API with Prisma, Zod validation and e-mail invites.",
-  },
-  {
-    repo: "carboAPI", year: "2024", url: "https://github.com/gabrielssouza23/carboAPI",
-    tags: ["Fastify 5", "PostgreSQL", "JWT"],
-    pt: "API do projeto Carbonífera Biodiversa: Fastify 5 sobre PostgreSQL, autenticação JWT e upload de arquivos via multipart.",
-    en: "API for the Carbonífera Biodiversa project: Fastify 5 over PostgreSQL, JWT auth and multipart file upload.",
-  },
-  {
-    repo: "portfolio3D", year: "2024", url: "https://github.com/gabrielssouza23/portfolio3D",
-    tags: ["Three.js", "R3F", "Framer Motion"],
-    pt: "Portfólio 3D com react-three-fiber e drei: cena interativa, animações em Framer Motion e envio de contato por EmailJS.",
-    en: "3D portfolio with react-three-fiber and drei: interactive scene, Framer Motion animations and EmailJS contact form.",
-  },
-  {
-    repo: "quick-news", year: "2024", url: "https://github.com/gabrielssouza23/quick-news",
-    tags: ["React", "Axios", "Tailwind"],
-    pt: "Portal de notícias em React consumindo API externa via Axios, com roteamento em React Router e UI em Material Tailwind.",
-    en: "News portal in React consuming an external API through Axios, React Router navigation and a Material Tailwind UI.",
-  },
-  {
-    repo: "almoxarifado", year: "2023", url: "https://github.com/gabrielssouza23/almoxarifado",
-    tags: ["PHP", "MVC", "MySQL", "jQuery"],
-    pt: "Sistema de controle de almoxarifado em PHP com arquitetura MVC própria, MySQL, Bootstrap e jQuery.",
-    en: "Inventory control system in PHP with a hand-rolled MVC architecture, MySQL, Bootstrap and jQuery.",
+    repo: "streaming-duo", year: "2026", url: "https://github.com/gabrielssouza23/streaming-duo",
+    tags: ["Chrome MV3", "WebSocket", "Node.js", "JavaScript"],
+    demo: {
+      src: "/projects/streaming-duo/demo.mp4",
+      poster: "/projects/streaming-duo/poster.webp",
+      width: 1908, height: 962,
+    },
+    pt: "Extensão de navegador para assistir Netflix sincronizado à distância: play, pause e seek de um lado são replicados no outro em tempo real. Servidor próprio em Node.js com WebSocket puro, sem dados passando por serviços de terceiros.",
+    en: "Browser extension for watching Netflix in sync from a distance: play, pause and seek on one side are mirrored on the other in real time. Own Node.js server on raw WebSockets, with no data going through third-party services.",
+    notes: {
+      pt: [
+        "Sincroniza por estado (playing + tempo), não por evento: menos tipos de mensagem e menos casos de borda.",
+        "Servidor como fonte da verdade: sala e nome vêm da conexão, nunca do cliente.",
+        "Supressão de eco, tolerância de drift de 1,5 s e heartbeat do host a cada 5 s.",
+      ],
+      en: [
+        "Syncs by state (playing + time), not by event: fewer message types and fewer edge cases.",
+        "Server as the source of truth: room and name come from the connection, never from the client.",
+        "Echo suppression, 1.5 s drift tolerance and a host heartbeat every 5 s.",
+      ],
+    },
   },
 ] as const;
 
-/** Grupos do stack — os rótulos de nível vêm traduzidos. */
-export const buildStack = (t: Copy) => [
-  { label: t.gFront, items: [
-    { name: "Next.js", lvl: t.lvlPrimary }, { name: "React", lvl: t.lvlPrimary },
-    { name: "TypeScript", lvl: t.lvlPrimary }, { name: "Tailwind CSS", lvl: t.lvlDaily },
-    { name: "jQuery", lvl: t.lvlLegacy },
-  ] },
+type StackItem = { name: string; lvl?: string };
+
+/**
+ * Grupos do stack, na ordem do currículo. Os rótulos de nível vêm traduzidos;
+ * item sem `lvl` aparece sem etiqueta (o currículo lista, mas não qualifica).
+ */
+export const buildStack = (t: Copy): { label: string; items: StackItem[] }[] => [
   { label: t.gBack, items: [
     { name: "Node.js", lvl: t.lvlPrimary }, { name: "NestJS", lvl: t.lvlSolid },
     { name: "Fastify", lvl: t.lvlSolid }, { name: "PHP", lvl: t.lvlSolid },
-    { name: "SQL puro", lvl: t.lvlStudy },
+    { name: "LangChain", lvl: t.lvlSolid }, { name: "SQL", lvl: t.lvlStudy },
+    { name: "Python · Java · C#" },
   ] },
   { label: t.gData, items: [
     { name: "PostgreSQL", lvl: t.lvlPrimary }, { name: "MySQL", lvl: t.lvlSolid },
-    { name: "LangChain", lvl: t.lvlSolid },
+  ] },
+  { label: t.gFront, items: [
+    { name: "Next.js", lvl: t.lvlPrimary }, { name: "React", lvl: t.lvlPrimary },
+    { name: "TypeScript", lvl: t.lvlPrimary }, { name: "Tailwind CSS", lvl: t.lvlDaily },
+    { name: "Zustand · Shadcn" }, { name: "Ant Design" },
+    { name: "jQuery", lvl: t.lvlLegacy },
   ] },
   { label: t.gInfra, items: [
     { name: "AWS", lvl: t.lvlCert }, { name: "Git / GitHub", lvl: t.lvlDaily },
-    { name: "JWT / REST", lvl: t.lvlDaily },
+  ] },
+  { label: t.gOther, items: [
+    { name: "JWT / REST", lvl: t.lvlDaily }, { name: "Google Maps API" },
+    { name: "Web3 · Chatbot" }, { name: "ERP" },
   ] },
 ];
+
+/** Formação, certificações e idiomas — direto do currículo. */
+export const DOSSIER = {
+  edu: [
+    { pt: "Tecnólogo em Sistemas para Internet", en: "Internet Systems Technology (associate degree)",
+      where: "IFSul", when: { pt: "2025 — 2027 · em andamento", en: "2025 — 2027 · in progress" } },
+    { pt: "Técnico em Informática", en: "IT Technician (technical high school)",
+      where: "IFSul", when: { pt: "2021 — 2024", en: "2021 — 2024" } },
+  ],
+  awards: [
+    { pt: "AWS Cloud Practitioner", en: "AWS Cloud Practitioner", meta: { pt: "certificado", en: "certified" } },
+    { pt: "1º lugar na Mocitec IFSul", en: "1st place at Mocitec IFSul", meta: { pt: "2024 · FEBRACE 2025", en: "2024 · FEBRACE 2025" } },
+    { pt: "Arquitetura de Soluções AWS", en: "AWS Solutions Architecture", meta: { pt: "Instituto Caldeira", en: "Instituto Caldeira" } },
+    { pt: "HTML, CSS e Node.js", en: "HTML, CSS and Node.js", meta: { pt: "Alura", en: "Alura" } },
+    { pt: "Hackathon Charcode IFSul", en: "Charcode IFSul Hackathon", meta: { pt: "2022 e 2023", en: "2022 and 2023" } },
+    { pt: "Cybersecurity and Best Practices", en: "Cybersecurity and Best Practices", meta: { pt: "Maratona Cisco", en: "Cisco marathon" } },
+  ],
+  langs: [
+    { pt: "Inglês", en: "English", meta: { pt: "B2 · Cambridge Linguaskill", en: "B2 · Cambridge Linguaskill" } },
+    { pt: "Português", en: "Portuguese", meta: { pt: "nativo", en: "native" } },
+  ],
+} as const;
 
 export const buildTimeline = (t: Copy) => [
   { period: t.maxPeriod, role: t.maxRole, company: t.maxCo, desc: t.maxDesc },

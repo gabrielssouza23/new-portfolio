@@ -16,15 +16,15 @@ export default function Header() {
   ];
 
   return (
-    <header className="flex bg-[#0A0908] justify-between items-center px-6.5 h-14 font-mono text-[10px] tracking-[0.16em] border-b border-[#8C8377]">
-      <div className="uppercase gap-2 flex items-center justify-center">
+    <header className="flex bg-[#0A0908] justify-between items-center px-6.5 h-14 font-mono text-[11px] tracking-[0.14em] border-b border-[#8C8377]/60">
+      <div className="uppercase gap-2 flex items-center justify-center whitespace-nowrap">
         <span className="bg-[#E8A24A] w-1.5 h-1.5 rounded-full shadow-[0_0_5px_2px_#E8A24Ae6]" />
-        <span className="text-[#E6DED3]">Gabriel Silva</span>
-        <span className="text-[#8C8377]">/</span>
-        <span className="text-[#8C8377]">Full Stack</span>
+        <span className="text-ink-bright">Gabriel Silva</span>
+        <span className="hidden text-ink/45 sm:inline">/</span>
+        <span className="hidden text-ink/65 sm:inline">Full Stack</span>
       </div>
 
-      <div className="flex justify-start items-center text-[#8C8377] gap-5">
+      <div className="flex justify-start items-center text-ink/70 gap-3 sm:gap-5">
         <nav className="hidden gap-5 uppercase md:flex">
           {nav.map((n) => (
             <Link key={n.href} href={n.href} className="transition-colors hover:text-gold">
@@ -33,24 +33,24 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="flex gap-5 text-center">
+        <div className="flex gap-2 text-center sm:gap-5">
           <button
             type="button"
             onClick={toggleLang}
             aria-label={lang === "pt" ? "Switch to English" : "Mudar para português"}
             className="flex gap-2 text-[#E8A24A] py-1.25 px-2.25 border border-[#E8A24A66] ml-1 justify-center items-center cursor-crosshair transition-colors hover:bg-gold/16"
           >
-            <span className={lang === "pt" ? "" : "opacity-40"}>PT</span>
-            <span className="opacity-40">/</span>
-            <span className={lang === "en" ? "" : "opacity-40"}>EN</span>
+            <span className={lang === "pt" ? "" : "opacity-45"}>PT</span>
+            <span className="opacity-45">/</span>
+            <span className={lang === "en" ? "" : "opacity-45"}>EN</span>
           </button>
           <button
             type="button"
             onClick={toggleAudio}
             aria-pressed={audio}
-            className="flex gap-2 text-[#E6DED399] py-1.25 px-2.25 border border-[#E6DED333] ml-1 justify-center items-center cursor-crosshair transition-colors hover:border-gold/60 hover:text-gold"
+            className="flex gap-2 text-ink/70 py-1.25 px-2.25 border border-ink/25 ml-1 justify-center items-center cursor-crosshair transition-colors hover:border-gold/60 hover:text-gold"
           >
-            <Music2Icon size={8} />
+            <Music2Icon size={11} />
             <span>{audio ? t.on : t.off}</span>
           </button>
         </div>

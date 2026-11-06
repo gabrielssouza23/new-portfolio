@@ -8,7 +8,7 @@ export default function Terminal() {
   const last = logs[0]?.m ?? t.logBoot;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-80 border-t border-gold/20 bg-[#060505]/90 font-mono text-[10px] text-ink/60 backdrop-blur-[10px]">
+    <div className="fixed inset-x-0 bottom-0 z-80 border-t border-gold/20 bg-[#060505]/90 font-mono text-[12px] text-ink/75 backdrop-blur-[10px]">
       <button
         type="button"
         onClick={toggleTerm}
@@ -18,7 +18,7 @@ export default function Terminal() {
         <span className="text-gold">&gt;</span>
         <span className="flex-1 truncate tracking-[0.06em]">{last}</span>
         <span aria-hidden className="h-3.25 w-1.75 animate-caret bg-gold" />
-        <span className="uppercase tracking-[0.2em] text-ink/35">
+        <span className="uppercase tracking-[0.16em] text-ink/58">
           {t.termHint} {termOpen ? "−" : "+"}
         </span>
       </button>
@@ -27,7 +27,7 @@ export default function Terminal() {
         <div className="flex max-h-42 flex-col-reverse gap-1.25 overflow-y-auto border-t border-ink/8 px-4.5 pt-1 pb-4">
           {logs.map((l, i) => (
             <div key={`${l.t}-${i}`} className="flex gap-3 tracking-[0.05em]">
-              <span className="flex-none text-gold/55">{l.t}</span>
+              <span className="flex-none text-gold/80">{l.t}</span>
               <span>{l.m}</span>
             </div>
           ))}

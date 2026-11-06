@@ -11,7 +11,7 @@ export default function BootScreen() {
     <div
       role="status"
       aria-live="polite"
-      className="fixed inset-0 z-100 flex flex-col justify-center bg-[#060505] px-[clamp(24px,8vw,140px)] font-mono text-xs leading-8 tracking-[0.08em] text-ink/70"
+      className="fixed inset-0 z-100 flex flex-col justify-center bg-[#060505] px-[clamp(24px,8vw,140px)] font-mono text-[13px] leading-8 tracking-[0.06em] text-ink/80"
     >
       {bootLines.map((line) => (
         <div key={line} className="flex gap-3.5">
@@ -22,7 +22,7 @@ export default function BootScreen() {
       <button
         type="button"
         onClick={skipBoot}
-        className="fixed right-6.5 bottom-6.5 cursor-crosshair border border-ink/25 px-4.5 py-2.5 font-mono text-[10px] uppercase tracking-[0.24em] text-ink/60 transition-colors hover:border-gold hover:text-gold"
+        className="fixed right-6.5 bottom-6.5 cursor-crosshair border border-ink/25 px-4.5 py-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-ink/75 transition-colors hover:border-gold hover:text-gold"
       >
         {t.skip}
       </button>

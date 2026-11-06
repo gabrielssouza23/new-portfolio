@@ -25,16 +25,18 @@ export default function Stack() {
         {groups.map((g) => (
           <Reveal key={g.label}>
             <div className="h-full bg-bg px-6 pt-6.5 pb-7.5">
-              <div className="mb-5 font-mono text-[9px] uppercase tracking-[0.28em] text-gold">
+              <div className="mb-5 font-mono text-[11px] uppercase tracking-[0.2em] text-gold">
                 {g.label}
               </div>
               <div className="flex flex-col gap-3">
                 {g.items.map((it) => (
                   <div key={it.name} className="flex items-baseline justify-between gap-3">
-                    <span className="text-[17px] font-extralight text-ink-bright">{it.name}</span>
-                    <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink/30">
-                      {it.lvl}
-                    </span>
+                    <span className="text-[17px] font-light text-ink-bright">{it.name}</span>
+                    {it.lvl && (
+                      <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-ink/58">
+                        {it.lvl}
+                      </span>
+                    )}
                   </div>
                 ))}
               </div>

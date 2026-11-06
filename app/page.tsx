@@ -36,10 +36,11 @@ export default function Home() {
         <Contact />
       </div>
 
-      {/* vinheta: escurece as bordas, como o tubo de um CRT */}
+      {/* vinheta: escurece as bordas, como o tubo de um CRT. Spread baixo de
+          propósito: o texto que está sendo lido na base da tela não pode apagar. */}
       <div
         aria-hidden
-        className="fixed inset-0 z-56 pointer-events-none shadow-[inset_0_0_240px_70px_rgba(10,9,8,0.92)]"
+        className="fixed inset-0 z-56 pointer-events-none shadow-[inset_0_0_220px_24px_rgba(10,9,8,0.85)]"
       />
 
       <Terminal />

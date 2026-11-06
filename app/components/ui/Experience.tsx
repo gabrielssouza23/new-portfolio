@@ -20,7 +20,7 @@ export default function Experience() {
         <SectionHeading num="03" title={t.secExp} />
       </Reveal>
 
-      <ol className="flex max-w-[900px] flex-col gap-11 border-l border-ink/13 pl-8.5">
+      <ol className="flex max-w-[900px] flex-col gap-14 border-l border-ink/15 pl-8.5">
         {timeline.map((e) => (
           <Reveal key={`${e.company}-${e.period}`}>
             <li className="relative list-none">
@@ -28,18 +28,27 @@ export default function Experience() {
                 aria-hidden
                 className="absolute -left-[39px] top-2.25 h-2.25 w-2.25 border border-gold bg-bg"
               />
-              <div className="mb-2.5 font-mono text-[10px] uppercase tracking-[0.22em] text-gold">
+              <div className="mb-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-gold">
                 {e.period}
               </div>
-              <h3 className="mb-1.25 text-[clamp(24px,3vw,38px)] font-extralight tracking-[-0.02em] text-ink-bright">
+              <h3 className="mb-1.5 text-[clamp(24px,3vw,36px)] font-light tracking-[-0.015em] text-ink-bright">
                 {e.role}
               </h3>
-              <div className="mb-3.5 font-mono text-[11px] tracking-[0.16em] text-ink/42">
+              <div className="mb-4.5 font-mono text-[12px] tracking-[0.08em] text-ink/65">
                 {e.company}
               </div>
-              <p className="max-w-[620px] text-[15px] font-light leading-[1.62] text-ink/55 text-pretty">
-                {e.desc}
-              </p>
+              {/* Bullets do currículo: escaneáveis, em vez de um bloco corrido */}
+              <ul className="max-w-[62ch] space-y-2.5">
+                {e.desc.map((item) => (
+                  <li
+                    key={item}
+                    className="flex gap-3 text-base leading-[1.6] text-ink/80 text-pretty"
+                  >
+                    <span aria-hidden className="font-mono text-gold">›</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </li>
           </Reveal>
         ))}
