@@ -33,7 +33,7 @@ export function useSystem() {
 const BOOT_LINES = [
   "nexus.init — core 6.4.1",
   "auth: gabriel.silva … ok",
-  "loading stack: next / nest / php / aws",
+  "loading stack: next / nest / python / aws",
   "holo emitter: online",
   "ready.",
 ];
@@ -60,7 +60,13 @@ export default function SystemProvider({ children }: { children: React.ReactNode
     setLogs((prev) => [{ t: stamp(), m }, ...prev].slice(0, 40));
   }, []);
 
-  const skipBoot = useCallback(() => setBooting(false), []);
+  // Fim do boot. O servidor renderiza em PT; quem não tem o navegador em
+  // português (ex.: recrutadores de fora) passa a ver o site em inglês. A troca
+  // acontece antes do conteúdo aparecer, então não há texto piscando.
+  const skipBoot = useCallback(() => {
+    setBooting(false);
+    if (!navigator.language.toLowerCase().startsWith("pt")) setLang("en");
+  }, []);
 
   // Sequência de boot: uma linha a cada 260ms, depois sai sozinho.
   useEffect(() => {
@@ -69,9 +75,9 @@ export default function SystemProvider({ children }: { children: React.ReactNode
     BOOT_LINES.forEach((line, i) => {
       timers.push(setTimeout(() => setBootLines((p) => [...p, line]), 300 + i * 260));
     });
-    timers.push(setTimeout(() => setBooting(false), 300 + BOOT_LINES.length * 260 + 420));
+    timers.push(setTimeout(skipBoot, 300 + BOOT_LINES.length * 260 + 420));
     return () => timers.forEach(clearTimeout);
-  }, [booting]);
+  }, [booting, skipBoot]);
 
   // Primeira linha do terminal, assim que o boot sai.
   const greeted = useRef(false);
