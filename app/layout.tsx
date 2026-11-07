@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { Archivo, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "./lib/site";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -16,10 +17,23 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
 });
 
+// A imagem de preview (og:image) vem de app/opengraph-image.tsx e o ícone de
+// app/icon.svg: o Next injeta as tags sozinho a partir desses arquivos.
 export const metadata: Metadata = {
-  title: "Gabriel Silva · Full Stack Developer",
-  description:
-    "Full stack developer from Brazil working with React, Next.js, TypeScript, Node.js, Python and PostgreSQL.",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Gabriel Silva",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    locale: "pt_BR",
+    alternateLocale: ["en_US"],
+  },
+  twitter: { card: "summary_large_image", title: SITE_TITLE, description: SITE_DESCRIPTION },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
